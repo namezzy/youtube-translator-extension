@@ -23,22 +23,13 @@
 
 ### 1. 下载插件
 
-将整个 `youtube-translator-extension` 文件夹下载到本地。
+将整个 `youtube-translator-extension` 文件夹下载到本地，或使用 Git 克隆：
 
-### 2. 准备图标文件
+```bash
+git clone https://github.com/namezzy/youtube-translator-extension.git
+```
 
-插件需要图标文件才能正常加载。你可以：
-
-**选项 A：使用在线工具创建图标**
-- 访问 [Favicon Generator](https://favicon.io/) 或类似工具
-- 创建 16x16、48x48、128x128 三个尺寸的 PNG 图标
-- 将它们保存到 `icons` 文件夹，命名为 `icon16.png`、`icon48.png`、`icon128.png`
-
-**选项 B：使用简单的蓝色方块作为临时图标**
-- 下载任意蓝色图标并调整为对应尺寸
-- 或使用 `icons/icon.svg` 转换为 PNG 格式
-
-### 3. 在 Chrome 中加载插件
+### 2. 在 Chrome 中加载插件
 
 1. 打开 Chrome 浏览器
 2. 访问 `chrome://extensions/`
