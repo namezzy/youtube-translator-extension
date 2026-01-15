@@ -132,8 +132,13 @@ async function translateText(text) {
       'apiProvider',
       'openaiKey',
       'claudeKey',
+      'grokKey',
       'openaiModel',
       'claudeModel',
+      'grokModel',
+      'openaiUrl',
+      'claudeUrl',
+      'grokUrl',
       'targetLang'
     ]);
 
@@ -141,9 +146,11 @@ async function translateText(text) {
     let translation;
 
     if (config.apiProvider === 'openai') {
-      translation = await translateWithOpenAI(text, config.openaiKey, config.openaiModel, targetLang);
+      translation = await translateWithOpenAI(text, config.openaiKey, config.openaiModel, config.openaiUrl, targetLang);
     } else if (config.apiProvider === 'claude') {
-      translation = await translateWithClaude(text, config.claudeKey, config.claudeModel, targetLang);
+      translation = await translateWithClaude(text, config.claudeKey, config.claudeModel, config.claudeUrl, targetLang);
+    } else if (config.apiProvider === 'grok') {
+      translation = await translateWithGrok(text, config.grokKey, config.grokModel, config.grokUrl, targetLang);
     } else {
       throw new Error('未配置 API 提供商');
     }
@@ -156,7 +163,7 @@ async function translateText(text) {
 }
 
 // 使用 OpenAI 翻译
-async function translateWithOpenAI(text, apiKey, model, targetLang) {
+async function translateWithOpenAI(text, apiKey, model, customUrl, targetLang) {
   const langMap = {
     'zh-CN': '简体中文',
     'zh-TW': '繁体中文',
@@ -169,7 +176,9 @@ async function translateWithOpenAI(text, apiKey, model, targetLang) {
     'ru': '俄语'
   };
 
-  const response = await fetch('https://api.openai.com/v1/chat/completions', {
+  const apiUrl = customUrl || 'https://api.openai.com/v1/chat/completions';
+
+  const response = await fetch(apiUrl, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -202,7 +211,7 @@ async function translateWithOpenAI(text, apiKey, model, targetLang) {
 }
 
 // 使用 Claude 翻译
-async function translateWithClaude(text, apiKey, model, targetLang) {
+async function translateWithClaude(text, apiKey, model, customUrl, targetLang) {
   const langMap = {
     'zh-CN': '简体中文',
     'zh-TW': '繁体中文',
@@ -215,7 +224,9 @@ async function translateWithClaude(text, apiKey, model, targetLang) {
     'ru': '俄语'
   };
 
-  const response = await fetch('https://api.anthropic.com/v1/messages', {
+  const apiUrl = customUrl || 'https://api.anthropic.com/v1/messages';
+
+  const response = await fetch(apiUrl, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -242,6 +253,54 @@ async function translateWithClaude(text, apiKey, model, targetLang) {
 
   const data = await response.json();
   return data.content[0].text.trim();
+}
+
+// 使用 Grok 翻译
+async function translateWithGrok(text, apiKey, model, customUrl, targetLang) {
+  const langMap = {
+    'zh-CN': '简体中文',
+    'zh-TW': '繁体中文',
+    'en': 'English',
+    'ja': '日语',
+    'ko': '韩语',
+    'es': '西班牙语',
+    'fr': '法语',
+    'de': '德语',
+    'ru': '俄语'
+  };
+
+  const apiUrl = customUrl || 'https://api.x.ai/v1/chat/completions';
+
+  const response = await fetch(apiUrl, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${apiKey}`
+    },
+    body: JSON.stringify({
+      model: model || 'grok-beta',
+      messages: [
+        {
+          role: 'system',
+          content: `你是一个专业的翻译助手。请将用户提供的文本翻译成${langMap[targetLang] || '简体中文'}。只需要返回翻译结果，不要添加任何解释或额外内容。`
+        },
+        {
+          role: 'user',
+          content: text
+        }
+      ],
+      temperature: 0.3,
+      max_tokens: 500
+    })
+  });
+
+  if (!response.ok) {
+    const error = await response.json();
+    throw new Error(error.error?.message || 'Grok API 请求失败');
+  }
+
+  const data = await response.json();
+  return data.choices[0].message.content.trim();
 }
 
 // 显示翻译结果

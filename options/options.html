@@ -116,6 +116,10 @@
           <input type="radio" id="claude" name="provider" value="claude">
           <label for="claude" style="margin: 0; font-weight: normal;">Claude (Anthropic)</label>
         </div>
+        <div class="radio-option">
+          <input type="radio" id="grok" name="provider" value="grok">
+          <label for="grok" style="margin: 0; font-weight: normal;">Grok (xAI)</label>
+        </div>
       </div>
     </div>
 
@@ -136,6 +140,14 @@
           <option value="gpt-3.5-turbo">GPT-3.5 Turbo (经济)</option>
         </select>
       </div>
+      
+      <div class="model-section">
+        <label for="openaiUrl">自定义 API URL (可选)</label>
+        <input type="text" id="openaiUrl" placeholder="https://api.openai.com/v1/chat/completions">
+        <div class="help-text">
+          留空使用默认地址，支持代理或第三方兼容接口
+        </div>
+      </div>
     </div>
 
     <div class="section" id="claudeSection" style="display: none;">
@@ -154,6 +166,39 @@
           <option value="claude-3-sonnet-20240229">Claude 3 Sonnet</option>
           <option value="claude-3-haiku-20240307">Claude 3 Haiku (经济)</option>
         </select>
+      </div>
+      
+      <div class="model-section">
+        <label for="claudeUrl">自定义 API URL (可选)</label>
+        <input type="text" id="claudeUrl" placeholder="https://api.anthropic.com/v1/messages">
+        <div class="help-text">
+          留空使用默认地址，支持代理或第三方兼容接口
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="grokSection" style="display: none;">
+      <label for="grokKey">Grok API Key</label>
+      <input type="password" id="grokKey" placeholder="xai-...">
+      <div class="help-text">
+        从 <a href="https://console.x.ai/" target="_blank">xAI Console</a> 获取 API Key
+      </div>
+      
+      <div class="model-section">
+        <label for="grokModel">选择模型</label>
+        <select id="grokModel">
+          <option value="grok-beta">Grok Beta (推荐)</option>
+          <option value="grok-2-latest">Grok 2 Latest</option>
+          <option value="grok-2-1212">Grok 2 (1212)</option>
+        </select>
+      </div>
+      
+      <div class="model-section">
+        <label for="grokUrl">自定义 API URL (可选)</label>
+        <input type="text" id="grokUrl" placeholder="https://api.x.ai/v1/chat/completions">
+        <div class="help-text">
+          留空使用默认地址，支持代理或第三方兼容接口
+        </div>
       </div>
     </div>
 

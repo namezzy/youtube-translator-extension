@@ -1,12 +1,14 @@
 # YouTube Video Translator - Chrome 浏览器插件
 
-🌐 一个支持 OpenAI 和 Claude API 的 YouTube 视频实时字幕翻译插件
+🌐 一个支持 OpenAI、Claude 和 Grok API 的 YouTube 视频实时字幕翻译插件
 
 ## ✨ 功能特性
 
 - ✅ 实时翻译 YouTube 视频字幕
 - ✅ 支持 OpenAI GPT 系列模型（GPT-4o, GPT-4o-mini, GPT-4 Turbo, GPT-3.5 等）
 - ✅ 支持 Claude 系列模型（Claude 3.5 Sonnet, Claude 3.5 Haiku, Claude 3 Opus 等）
+- ✅ 支持 Grok 系列模型（Grok Beta, Grok 2 Latest, Grok 2 等）
+- ✅ 支持自定义 API URL（代理或第三方兼容接口）
 - ✅ 支持多种目标语言翻译（中文简繁体、英语、日语、韩语等）
 - ✅ 自动检测字幕变化并实时翻译
 - ✅ 优雅的翻译显示界面
@@ -56,6 +58,7 @@
    - **GPT-4o-mini**（快速）- 更快速且经济
    - **GPT-4 Turbo** - 强大的翻译能力
    - **GPT-3.5 Turbo**（经济）- 经济实惠
+4. （可选）自定义 API URL - 留空使用默认地址，支持代理或第三方兼容接口
 
 #### 使用 Claude
 1. 选择 **Claude (Anthropic)** 单选按钮
@@ -65,6 +68,16 @@
    - **Claude 3.5 Haiku**（快速）- 快速响应
    - **Claude 3 Opus** - 最高质量
    - **Claude 3 Haiku**（经济）- 经济型选择
+4. （可选）自定义 API URL - 留空使用默认地址，支持代理或第三方兼容接口
+
+#### 使用 Grok
+1. 选择 **Grok (xAI)** 单选按钮
+2. 输入你的 Grok API Key（从 [xAI Console](https://console.x.ai/) 获取）
+3. 选择模型：
+   - **Grok Beta**（推荐）- 最新测试版
+   - **Grok 2 Latest** - 最新稳定版
+   - **Grok 2 (1212)** - 特定版本
+4. （可选）自定义 API URL - 留空使用默认地址，支持代理或第三方兼容接口
 
 ### 3. 选择目标语言
 
