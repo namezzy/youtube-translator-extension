@@ -1,6 +1,6 @@
 # YouTube Video Translator - Chrome 浏览器插件
 
-🌐 一个支持 OpenAI、Claude、Grok、Groq 和 Gemini API 的 YouTube 视频实时字幕翻译插件
+🌐 一个支持 OpenAI、Claude、Grok、Groq、Gemini 和自定义 AI 的 YouTube 视频实时字幕翻译插件
 
 ## ✨ 功能特性
 
@@ -10,6 +10,7 @@
 - ✅ 支持 Grok 系列模型（Grok Beta, Grok 2 Latest, Grok 2, Grok Vision Beta 等）
 - ✅ 支持 Groq 系列模型（Llama 3.3 70B, Llama 3.1, Mixtral, Gemma 2 等）
 - ✅ 支持 Google Gemini 系列模型（Gemini 2.0 Flash, Gemini 1.5 Pro/Flash 等）
+- ✅ 支持自定义 AI（DeepSeek、通义千问、Kimi、零一万物等任意兼容接口）
 - ✅ 支持自定义 API URL（代理或第三方兼容接口）
 - ✅ 支持多种目标语言翻译（中文简繁体、英语、日语、韩语等）
 - ✅ 自动检测字幕变化并实时翻译
@@ -106,6 +107,27 @@
    - **Gemini 1.5 Flash 8B**（经济）- 经济型小模型
    - **Gemini Pro** - 标准专业模型
 4. （可选）自定义 API URL - 留空使用默认地址，支持代理或第三方兼容接口
+
+#### 使用自定义 AI
+1. 选择 **自定义 AI** 单选按钮
+2. 填写配置信息：
+   - **AI 名称**：给您的 AI 起个名字（如：DeepSeek, 通义千问, Kimi, 零一万物等）
+   - **API Key**：输入对应服务商的 API Key（部分服务可能不需要）
+   - **API URL**（必填）：输入完整的 API 端点地址
+   - **模型名称**：输入要使用的模型名称（如：deepseek-chat, qwen-turbo）
+   - **API 格式类型**：选择 API 格式
+     - **OpenAI 兼容格式**（默认）- 适用于大多数兼容 OpenAI API 的服务
+     - **Gemini 格式** - 适用于使用 Gemini API 格式的服务
+3. 保存设置
+
+**支持的自定义 AI 示例：**
+- 🚀 **DeepSeek** - deepseek-chat
+- 🌟 **通义千问 (Qwen)** - qwen-turbo, qwen-plus, qwen-max
+- 💫 **Kimi (Moonshot)** - moonshot-v1-8k, moonshot-v1-32k
+- 🎯 **零一万物 (Yi)** - yi-large, yi-medium
+- 🔥 **智谱清言 (GLM)** - glm-4, glm-4-plus
+- 💡 **百川智能** - Baichuan2-Turbo
+- 以及其他任意兼容 OpenAI 或 Gemini 格式的 AI 服务
 
 ### 3. 选择目标语言
 

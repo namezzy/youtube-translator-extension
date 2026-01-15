@@ -1,5 +1,47 @@
 # 更新日志
 
+## v1.3.0 - 2026-01-15
+
+### 新增功能
+
+#### 1. 自定义 AI 支持 🎉
+- ✅ 支持配置任意兼容 OpenAI 或 Gemini 格式的 AI 服务
+- ✅ 可自定义 AI 名称、API Key、API URL、模型名称
+- ✅ 支持两种 API 格式：OpenAI 兼容格式和 Gemini 格式
+- ✅ 完美支持国内主流 AI 服务：
+  - DeepSeek、通义千问、Kimi、零一万物、智谱清言、百川智能等
+
+#### 2. 灵活的配置选项
+- ✅ API Key 可选（部分服务不需要）
+- ✅ 支持自定义 API URL
+- ✅ 支持自定义模型名称
+- ✅ 智能识别 API 格式类型
+
+### 使用说明
+
+#### 配置自定义 AI
+1. 在插件设置中选择 "自定义 AI"
+2. 填写 AI 名称（如：DeepSeek）
+3. 输入 API Key（如果需要）
+4. 输入完整的 API URL
+5. 输入模型名称
+6. 选择 API 格式类型
+7. 保存设置
+
+**示例配置：**
+
+**DeepSeek:**
+- API URL: `https://api.deepseek.com/v1/chat/completions`
+- 模型名称: `deepseek-chat`
+- API 格式: OpenAI 兼容格式
+
+**通义千问:**
+- API URL: `https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions`
+- 模型名称: `qwen-turbo`
+- API 格式: OpenAI 兼容格式
+
+---
+
 ## v1.2.0 - 2026-01-15
 
 ### 新增功能

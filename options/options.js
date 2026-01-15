@@ -4,26 +4,33 @@ document.addEventListener('DOMContentLoaded', async () => {
   const grokRadio = document.getElementById('grok');
   const groqRadio = document.getElementById('groq');
   const geminiRadio = document.getElementById('gemini');
+  const customRadio = document.getElementById('custom');
   const openaiSection = document.getElementById('openaiSection');
   const claudeSection = document.getElementById('claudeSection');
   const grokSection = document.getElementById('grokSection');
   const groqSection = document.getElementById('groqSection');
   const geminiSection = document.getElementById('geminiSection');
+  const customSection = document.getElementById('customSection');
   const openaiKeyInput = document.getElementById('openaiKey');
   const claudeKeyInput = document.getElementById('claudeKey');
   const grokKeyInput = document.getElementById('grokKey');
   const groqKeyInput = document.getElementById('groqKey');
   const geminiKeyInput = document.getElementById('geminiKey');
+  const customKeyInput = document.getElementById('customKey');
   const openaiModelSelect = document.getElementById('openaiModel');
   const claudeModelSelect = document.getElementById('claudeModel');
   const grokModelSelect = document.getElementById('grokModel');
   const groqModelSelect = document.getElementById('groqModel');
   const geminiModelSelect = document.getElementById('geminiModel');
+  const customModelInput = document.getElementById('customModel');
   const openaiUrlInput = document.getElementById('openaiUrl');
   const claudeUrlInput = document.getElementById('claudeUrl');
   const grokUrlInput = document.getElementById('grokUrl');
   const groqUrlInput = document.getElementById('groqUrl');
   const geminiUrlInput = document.getElementById('geminiUrl');
+  const customUrlInput = document.getElementById('customUrl');
+  const customNameInput = document.getElementById('customName');
+  const customTypeSelect = document.getElementById('customType');
   const targetLangSelect = document.getElementById('targetLang');
   const saveBtn = document.getElementById('saveBtn');
   const saveStatus = document.getElementById('saveStatus');
@@ -36,16 +43,21 @@ document.addEventListener('DOMContentLoaded', async () => {
     'grokKey',
     'groqKey',
     'geminiKey',
+    'customKey',
     'openaiModel',
     'claudeModel',
     'grokModel',
     'groqModel',
     'geminiModel',
+    'customModel',
     'openaiUrl',
     'claudeUrl',
     'grokUrl',
     'groqUrl',
     'geminiUrl',
+    'customUrl',
+    'customName',
+    'customType',
     'targetLang'
   ]);
 
@@ -64,6 +76,9 @@ document.addEventListener('DOMContentLoaded', async () => {
   } else if (config.apiProvider === 'gemini') {
     geminiRadio.checked = true;
     geminiSection.style.display = 'block';
+  } else if (config.apiProvider === 'custom') {
+    customRadio.checked = true;
+    customSection.style.display = 'block';
   }
 
   if (config.openaiKey) openaiKeyInput.value = config.openaiKey;
@@ -71,16 +86,21 @@ document.addEventListener('DOMContentLoaded', async () => {
   if (config.grokKey) grokKeyInput.value = config.grokKey;
   if (config.groqKey) groqKeyInput.value = config.groqKey;
   if (config.geminiKey) geminiKeyInput.value = config.geminiKey;
+  if (config.customKey) customKeyInput.value = config.customKey;
   if (config.openaiModel) openaiModelSelect.value = config.openaiModel;
   if (config.claudeModel) claudeModelSelect.value = config.claudeModel;
   if (config.grokModel) grokModelSelect.value = config.grokModel;
   if (config.groqModel) groqModelSelect.value = config.groqModel;
   if (config.geminiModel) geminiModelSelect.value = config.geminiModel;
+  if (config.customModel) customModelInput.value = config.customModel;
   if (config.openaiUrl) openaiUrlInput.value = config.openaiUrl;
   if (config.claudeUrl) claudeUrlInput.value = config.claudeUrl;
   if (config.grokUrl) grokUrlInput.value = config.grokUrl;
   if (config.groqUrl) groqUrlInput.value = config.groqUrl;
   if (config.geminiUrl) geminiUrlInput.value = config.geminiUrl;
+  if (config.customUrl) customUrlInput.value = config.customUrl;
+  if (config.customName) customNameInput.value = config.customName;
+  if (config.customType) customTypeSelect.value = config.customType;
   if (config.targetLang) targetLangSelect.value = config.targetLang;
 
   // 切换提供商
@@ -90,6 +110,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     grokSection.style.display = 'none';
     groqSection.style.display = 'none';
     geminiSection.style.display = 'none';
+    customSection.style.display = 'none';
   });
 
   claudeRadio.addEventListener('change', () => {
@@ -98,6 +119,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     grokSection.style.display = 'none';
     groqSection.style.display = 'none';
     geminiSection.style.display = 'none';
+    customSection.style.display = 'none';
   });
 
   grokRadio.addEventListener('change', () => {
@@ -106,6 +128,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     grokSection.style.display = 'block';
     groqSection.style.display = 'none';
     geminiSection.style.display = 'none';
+    customSection.style.display = 'none';
   });
 
   groqRadio.addEventListener('change', () => {
@@ -114,6 +137,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     grokSection.style.display = 'none';
     groqSection.style.display = 'block';
     geminiSection.style.display = 'none';
+    customSection.style.display = 'none';
   });
 
   geminiRadio.addEventListener('change', () => {
@@ -122,6 +146,16 @@ document.addEventListener('DOMContentLoaded', async () => {
     grokSection.style.display = 'none';
     groqSection.style.display = 'none';
     geminiSection.style.display = 'block';
+    customSection.style.display = 'none';
+  });
+
+  customRadio.addEventListener('change', () => {
+    openaiSection.style.display = 'none';
+    claudeSection.style.display = 'none';
+    grokSection.style.display = 'none';
+    groqSection.style.display = 'none';
+    geminiSection.style.display = 'none';
+    customSection.style.display = 'block';
   });
 
   // 保存设置
@@ -131,6 +165,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (grokRadio.checked) provider = 'grok';
     if (groqRadio.checked) provider = 'groq';
     if (geminiRadio.checked) provider = 'gemini';
+    if (customRadio.checked) provider = 'custom';
     
     const settings = {
       apiProvider: provider,
@@ -139,16 +174,21 @@ document.addEventListener('DOMContentLoaded', async () => {
       grokKey: grokKeyInput.value.trim(),
       groqKey: groqKeyInput.value.trim(),
       geminiKey: geminiKeyInput.value.trim(),
+      customKey: customKeyInput.value.trim(),
       openaiModel: openaiModelSelect.value,
       claudeModel: claudeModelSelect.value,
       grokModel: grokModelSelect.value,
       groqModel: groqModelSelect.value,
       geminiModel: geminiModelSelect.value,
+      customModel: customModelInput.value.trim(),
       openaiUrl: openaiUrlInput.value.trim(),
       claudeUrl: claudeUrlInput.value.trim(),
       grokUrl: grokUrlInput.value.trim(),
       groqUrl: groqUrlInput.value.trim(),
       geminiUrl: geminiUrlInput.value.trim(),
+      customUrl: customUrlInput.value.trim(),
+      customName: customNameInput.value.trim(),
+      customType: customTypeSelect.value,
       targetLang: targetLangSelect.value
     };
 
@@ -176,6 +216,17 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (provider === 'gemini' && !settings.geminiKey) {
       showSaveStatus('请输入 Gemini API Key', false);
       return;
+    }
+
+    if (provider === 'custom') {
+      if (!settings.customUrl) {
+        showSaveStatus('请输入自定义 API URL', false);
+        return;
+      }
+      if (!settings.customModel) {
+        showSaveStatus('请输入模型名称', false);
+        return;
+      }
     }
 
     await chrome.storage.sync.set(settings);
