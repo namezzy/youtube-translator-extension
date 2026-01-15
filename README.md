@@ -1,13 +1,15 @@
 # YouTube Video Translator - Chrome 浏览器插件
 
-🌐 一个支持 OpenAI、Claude 和 Grok API 的 YouTube 视频实时字幕翻译插件
+🌐 一个支持 OpenAI、Claude、Grok、Groq 和 Gemini API 的 YouTube 视频实时字幕翻译插件
 
 ## ✨ 功能特性
 
 - ✅ 实时翻译 YouTube 视频字幕
 - ✅ 支持 OpenAI GPT 系列模型（GPT-4o, GPT-4o-mini, GPT-4 Turbo, GPT-3.5 等）
 - ✅ 支持 Claude 系列模型（Claude 3.5 Sonnet, Claude 3.5 Haiku, Claude 3 Opus 等）
-- ✅ 支持 Grok 系列模型（Grok Beta, Grok 2 Latest, Grok 2 等）
+- ✅ 支持 Grok 系列模型（Grok Beta, Grok 2 Latest, Grok 2, Grok Vision Beta 等）
+- ✅ 支持 Groq 系列模型（Llama 3.3 70B, Llama 3.1, Mixtral, Gemma 2 等）
+- ✅ 支持 Google Gemini 系列模型（Gemini 2.0 Flash, Gemini 1.5 Pro/Flash 等）
 - ✅ 支持自定义 API URL（代理或第三方兼容接口）
 - ✅ 支持多种目标语言翻译（中文简繁体、英语、日语、韩语等）
 - ✅ 自动检测字幕变化并实时翻译
@@ -81,6 +83,28 @@
    - **Grok Vision Beta** - 支持视觉理解的测试版
    - **Grok 1.5** - Grok 1.5 版本
    - **Grok 1** - Grok 第一代模型
+4. （可选）自定义 API URL - 留空使用默认地址，支持代理或第三方兼容接口
+
+#### 使用 Groq
+1. 选择 **Groq** 单选按钮
+2. 输入你的 Groq API Key（从 [Groq Console](https://console.groq.com/keys) 获取）
+3. 选择模型：
+   - **Llama 3.3 70B**（推荐）- 最新最强开源模型
+   - **Llama 3.1 70B** - Meta Llama 3.1 大模型
+   - **Llama 3.1 8B**（快速）- 快速响应的小模型
+   - **Mixtral 8x7B** - Mistral AI 混合专家模型
+   - **Gemma 2 9B** - Google Gemma 2 模型
+4. （可选）自定义 API URL - 留空使用默认地址，支持代理或第三方兼容接口
+
+#### 使用 Gemini
+1. 选择 **Gemini (Google)** 单选按钮
+2. 输入你的 Gemini API Key（从 [Google AI Studio](https://aistudio.google.com/app/apikey) 获取）
+3. 选择模型：
+   - **Gemini 2.0 Flash**（推荐）- 最新最快模型
+   - **Gemini 1.5 Pro** - 高性能专业模型
+   - **Gemini 1.5 Flash**（快速）- 快速响应
+   - **Gemini 1.5 Flash 8B**（经济）- 经济型小模型
+   - **Gemini Pro** - 标准专业模型
 4. （可选）自定义 API URL - 留空使用默认地址，支持代理或第三方兼容接口
 
 ### 3. 选择目标语言

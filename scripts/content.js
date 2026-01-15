@@ -133,12 +133,18 @@ async function translateText(text) {
       'openaiKey',
       'claudeKey',
       'grokKey',
+      'groqKey',
+      'geminiKey',
       'openaiModel',
       'claudeModel',
       'grokModel',
+      'groqModel',
+      'geminiModel',
       'openaiUrl',
       'claudeUrl',
       'grokUrl',
+      'groqUrl',
+      'geminiUrl',
       'targetLang'
     ]);
 
@@ -151,6 +157,10 @@ async function translateText(text) {
       translation = await translateWithClaude(text, config.claudeKey, config.claudeModel, config.claudeUrl, targetLang);
     } else if (config.apiProvider === 'grok') {
       translation = await translateWithGrok(text, config.grokKey, config.grokModel, config.grokUrl, targetLang);
+    } else if (config.apiProvider === 'groq') {
+      translation = await translateWithGroq(text, config.groqKey, config.groqModel, config.groqUrl, targetLang);
+    } else if (config.apiProvider === 'gemini') {
+      translation = await translateWithGemini(text, config.geminiKey, config.geminiModel, config.geminiUrl, targetLang);
     } else {
       throw new Error('未配置 API 提供商');
     }
@@ -301,6 +311,99 @@ async function translateWithGrok(text, apiKey, model, customUrl, targetLang) {
 
   const data = await response.json();
   return data.choices[0].message.content.trim();
+}
+
+// 使用 Groq 翻译
+async function translateWithGroq(text, apiKey, model, customUrl, targetLang) {
+  const langMap = {
+    'zh-CN': '简体中文',
+    'zh-TW': '繁体中文',
+    'en': 'English',
+    'ja': '日语',
+    'ko': '韩语',
+    'es': '西班牙语',
+    'fr': '法语',
+    'de': '德语',
+    'ru': '俄语'
+  };
+
+  const apiUrl = customUrl || 'https://api.groq.com/openai/v1/chat/completions';
+
+  const response = await fetch(apiUrl, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${apiKey}`
+    },
+    body: JSON.stringify({
+      model: model || 'llama-3.3-70b-versatile',
+      messages: [
+        {
+          role: 'system',
+          content: `你是一个专业的翻译助手。请将用户提供的文本翻译成${langMap[targetLang] || '简体中文'}。只需要返回翻译结果，不要添加任何解释或额外内容。`
+        },
+        {
+          role: 'user',
+          content: text
+        }
+      ],
+      temperature: 0.3,
+      max_tokens: 500
+    })
+  });
+
+  if (!response.ok) {
+    const error = await response.json();
+    throw new Error(error.error?.message || 'Groq API 请求失败');
+  }
+
+  const data = await response.json();
+  return data.choices[0].message.content.trim();
+}
+
+// 使用 Gemini 翻译
+async function translateWithGemini(text, apiKey, model, customUrl, targetLang) {
+  const langMap = {
+    'zh-CN': '简体中文',
+    'zh-TW': '繁体中文',
+    'en': 'English',
+    'ja': '日语',
+    'ko': '韩语',
+    'es': '西班牙语',
+    'fr': '法语',
+    'de': '德语',
+    'ru': '俄语'
+  };
+
+  const baseUrl = customUrl || 'https://generativelanguage.googleapis.com/v1beta';
+  const modelName = model || 'gemini-2.0-flash-exp';
+  const apiUrl = `${baseUrl}/models/${modelName}:generateContent?key=${apiKey}`;
+
+  const response = await fetch(apiUrl, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      contents: [{
+        parts: [{
+          text: `请将以下文本翻译成${langMap[targetLang] || '简体中文'}。只需要返回翻译结果，不要添加任何解释或额外内容。\n\n${text}`
+        }]
+      }],
+      generationConfig: {
+        temperature: 0.3,
+        maxOutputTokens: 500
+      }
+    })
+  });
+
+  if (!response.ok) {
+    const error = await response.json();
+    throw new Error(error.error?.message || 'Gemini API 请求失败');
+  }
+
+  const data = await response.json();
+  return data.candidates[0].content.parts[0].text.trim();
 }
 
 // 显示翻译结果

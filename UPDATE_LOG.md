@@ -1,5 +1,35 @@
 # 更新日志
 
+## v1.2.0 - 2026-01-15
+
+### 新增功能
+
+#### 1. Groq AI 模型支持
+- ✅ 添加了 Groq 超快推理引擎支持
+- ✅ 支持 Llama 3.3 70B、Llama 3.1 系列、Mixtral 8x7B、Gemma 2 9B 等开源模型
+- ✅ 提供业界领先的推理速度
+
+#### 2. Google Gemini 模型支持
+- ✅ 添加了 Google Gemini 系列模型支持
+- ✅ 支持 Gemini 2.0 Flash、Gemini 1.5 Pro/Flash 等模型
+- ✅ 提供高质量的翻译服务
+
+### 使用说明
+
+#### 配置 Groq
+1. 访问 https://console.groq.com/keys 获取 API Key
+2. 在插件设置中选择 "Groq"
+3. 输入 API Key 并选择模型
+4. 可选择填写自定义 API URL
+
+#### 配置 Gemini
+1. 访问 https://aistudio.google.com/app/apikey 获取 API Key
+2. 在插件设置中选择 "Gemini (Google)"
+3. 输入 API Key 并选择模型
+4. 可选择填写自定义 API URL
+
+---
+
 ## v1.1.0 - 2026-01-15
 
 ### 新增功能
