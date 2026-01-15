@@ -142,6 +142,11 @@ async function translateText(text) {
       'groqModel',
       'geminiModel',
       'customModel',
+      'openaiCustomModel',
+      'claudeCustomModel',
+      'grokCustomModel',
+      'groqCustomModel',
+      'geminiCustomModel',
       'openaiUrl',
       'claudeUrl',
       'grokUrl',
@@ -156,15 +161,20 @@ async function translateText(text) {
     let translation;
 
     if (config.apiProvider === 'openai') {
-      translation = await translateWithOpenAI(text, config.openaiKey, config.openaiModel, config.openaiUrl, targetLang);
+      const model = config.openaiModel === 'custom' ? config.openaiCustomModel : config.openaiModel;
+      translation = await translateWithOpenAI(text, config.openaiKey, model, config.openaiUrl, targetLang);
     } else if (config.apiProvider === 'claude') {
-      translation = await translateWithClaude(text, config.claudeKey, config.claudeModel, config.claudeUrl, targetLang);
+      const model = config.claudeModel === 'custom' ? config.claudeCustomModel : config.claudeModel;
+      translation = await translateWithClaude(text, config.claudeKey, model, config.claudeUrl, targetLang);
     } else if (config.apiProvider === 'grok') {
-      translation = await translateWithGrok(text, config.grokKey, config.grokModel, config.grokUrl, targetLang);
+      const model = config.grokModel === 'custom' ? config.grokCustomModel : config.grokModel;
+      translation = await translateWithGrok(text, config.grokKey, model, config.grokUrl, targetLang);
     } else if (config.apiProvider === 'groq') {
-      translation = await translateWithGroq(text, config.groqKey, config.groqModel, config.groqUrl, targetLang);
+      const model = config.groqModel === 'custom' ? config.groqCustomModel : config.groqModel;
+      translation = await translateWithGroq(text, config.groqKey, model, config.groqUrl, targetLang);
     } else if (config.apiProvider === 'gemini') {
-      translation = await translateWithGemini(text, config.geminiKey, config.geminiModel, config.geminiUrl, targetLang);
+      const model = config.geminiModel === 'custom' ? config.geminiCustomModel : config.geminiModel;
+      translation = await translateWithGemini(text, config.geminiKey, model, config.geminiUrl, targetLang);
     } else if (config.apiProvider === 'custom') {
       translation = await translateWithCustom(text, config.customKey, config.customModel, config.customUrl, config.customType, targetLang);
     } else {

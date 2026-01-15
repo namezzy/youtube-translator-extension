@@ -23,6 +23,16 @@ document.addEventListener('DOMContentLoaded', async () => {
   const groqModelSelect = document.getElementById('groqModel');
   const geminiModelSelect = document.getElementById('geminiModel');
   const customModelInput = document.getElementById('customModel');
+  const openaiCustomModelInput = document.getElementById('openaiCustomModel');
+  const claudeCustomModelInput = document.getElementById('claudeCustomModel');
+  const grokCustomModelInput = document.getElementById('grokCustomModel');
+  const groqCustomModelInput = document.getElementById('groqCustomModel');
+  const geminiCustomModelInput = document.getElementById('geminiCustomModel');
+  const openaiCustomModelSection = document.getElementById('openaiCustomModelSection');
+  const claudeCustomModelSection = document.getElementById('claudeCustomModelSection');
+  const grokCustomModelSection = document.getElementById('grokCustomModelSection');
+  const groqCustomModelSection = document.getElementById('groqCustomModelSection');
+  const geminiCustomModelSection = document.getElementById('geminiCustomModelSection');
   const openaiUrlInput = document.getElementById('openaiUrl');
   const claudeUrlInput = document.getElementById('claudeUrl');
   const grokUrlInput = document.getElementById('grokUrl');
@@ -50,6 +60,11 @@ document.addEventListener('DOMContentLoaded', async () => {
     'groqModel',
     'geminiModel',
     'customModel',
+    'openaiCustomModel',
+    'claudeCustomModel',
+    'grokCustomModel',
+    'groqCustomModel',
+    'geminiCustomModel',
     'openaiUrl',
     'claudeUrl',
     'grokUrl',
@@ -93,6 +108,11 @@ document.addEventListener('DOMContentLoaded', async () => {
   if (config.groqModel) groqModelSelect.value = config.groqModel;
   if (config.geminiModel) geminiModelSelect.value = config.geminiModel;
   if (config.customModel) customModelInput.value = config.customModel;
+  if (config.openaiCustomModel) openaiCustomModelInput.value = config.openaiCustomModel;
+  if (config.claudeCustomModel) claudeCustomModelInput.value = config.claudeCustomModel;
+  if (config.grokCustomModel) grokCustomModelInput.value = config.grokCustomModel;
+  if (config.groqCustomModel) groqCustomModelInput.value = config.groqCustomModel;
+  if (config.geminiCustomModel) geminiCustomModelInput.value = config.geminiCustomModel;
   if (config.openaiUrl) openaiUrlInput.value = config.openaiUrl;
   if (config.claudeUrl) claudeUrlInput.value = config.claudeUrl;
   if (config.grokUrl) grokUrlInput.value = config.grokUrl;
@@ -102,6 +122,34 @@ document.addEventListener('DOMContentLoaded', async () => {
   if (config.customName) customNameInput.value = config.customName;
   if (config.customType) customTypeSelect.value = config.customType;
   if (config.targetLang) targetLangSelect.value = config.targetLang;
+
+  // 根据选择的模型显示/隐藏自定义模型输入框
+  if (config.openaiModel === 'custom') openaiCustomModelSection.style.display = 'block';
+  if (config.claudeModel === 'custom') claudeCustomModelSection.style.display = 'block';
+  if (config.grokModel === 'custom') grokCustomModelSection.style.display = 'block';
+  if (config.groqModel === 'custom') groqCustomModelSection.style.display = 'block';
+  if (config.geminiModel === 'custom') geminiCustomModelSection.style.display = 'block';
+
+  // 监听模型选择变化
+  openaiModelSelect.addEventListener('change', () => {
+    openaiCustomModelSection.style.display = openaiModelSelect.value === 'custom' ? 'block' : 'none';
+  });
+
+  claudeModelSelect.addEventListener('change', () => {
+    claudeCustomModelSection.style.display = claudeModelSelect.value === 'custom' ? 'block' : 'none';
+  });
+
+  grokModelSelect.addEventListener('change', () => {
+    grokCustomModelSection.style.display = grokModelSelect.value === 'custom' ? 'block' : 'none';
+  });
+
+  groqModelSelect.addEventListener('change', () => {
+    groqCustomModelSection.style.display = groqModelSelect.value === 'custom' ? 'block' : 'none';
+  });
+
+  geminiModelSelect.addEventListener('change', () => {
+    geminiCustomModelSection.style.display = geminiModelSelect.value === 'custom' ? 'block' : 'none';
+  });
 
   // 切换提供商
   openaiRadio.addEventListener('change', () => {
@@ -181,6 +229,11 @@ document.addEventListener('DOMContentLoaded', async () => {
       groqModel: groqModelSelect.value,
       geminiModel: geminiModelSelect.value,
       customModel: customModelInput.value.trim(),
+      openaiCustomModel: openaiCustomModelInput.value.trim(),
+      claudeCustomModel: claudeCustomModelInput.value.trim(),
+      grokCustomModel: grokCustomModelInput.value.trim(),
+      groqCustomModel: groqCustomModelInput.value.trim(),
+      geminiCustomModel: geminiCustomModelInput.value.trim(),
       openaiUrl: openaiUrlInput.value.trim(),
       claudeUrl: claudeUrlInput.value.trim(),
       grokUrl: grokUrlInput.value.trim(),
