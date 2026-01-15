@@ -1,0 +1,34 @@
+# Node modules
+node_modules/
+npm-debug.log*
+
+# Build files
+dist/
+build/
+*.crx
+*.pem
+*.zip
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.log
+
+# Private keys (important!)
+secrets/
+*.key
+private_key.pem
+
+# Test files
+test/
+*.test.js
