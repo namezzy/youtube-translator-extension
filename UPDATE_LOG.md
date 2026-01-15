@@ -6,7 +6,7 @@
 
 #### 1. Grok AI 模型支持
 - ✅ 添加了 xAI 公司的 Grok 系列模型支持
-- ✅ 支持 Grok Beta、Grok 2 Latest、Grok 2 (1212) 等模型
+- ✅ 支持 Grok Beta、Grok 2 Latest、Grok 2 (1212)、Grok 2、Grok Vision Beta、Grok 1.5、Grok 1 等模型
 - ✅ 可在设置页面选择 Grok 作为翻译提供商
 
 #### 2. 自定义 API URL
