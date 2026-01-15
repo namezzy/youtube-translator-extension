@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
   "name": "YouTube Video Translator",
-  "version": "1.0.0",
-  "description": "使用 OpenAI 或 Claude API 翻译 YouTube 视频字幕",
+  "version": "1.2.0",
+  "description": "使用 OpenAI 或 Claude API 翻译 YouTube 视频字幕，并提供视频内容智能总结和字幕下载对照",
   "permissions": [
     "storage",
     "activeTab",
